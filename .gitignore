@@ -1,0 +1,63 @@
+# Compiled class files
+*.class
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# Log files
+*.log
+logs/
+
+# IDE files (IntelliJ, Eclipse, VS Code)
+.idea/
+.gradle/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/
+# Spring Boot Actuator dump files
+*.dump
+
+# Specific to Spring Boot
+!**/src/main/**/build/
+!**/src/main/**/target/
+!**/src/main/**/bin/
+!**/src/main/**/.project
+!**/src/main/**/.classpath
+!**/src/main/**/.settings/
+!**/src/main/**/.vscode/
+
+# Database files (if using embedded or local DB files)
+*.mv.db  # H2 Database
+*.trace.db # H2 Database
+*.db # SQLite, etc.
+data/ # If your data directory contains local database files
+
+# Environment variables or configuration files
+.env
+*.properties.bak
+*.yml.bak
+application*.properties
+application*.yml
+!src/main/resources/application.properties # Gardez les fichiers application.properties/yml sous contrôle si non sensibles
+!src/main/resources/application.yml
+
+# Operating System files
+.DS_Store
+Thumbs.db

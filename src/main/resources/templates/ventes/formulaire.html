@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${vente.id == null ? 'Ajouter une Vente' : 'Modifier une Vente'}"></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1 th:text="${vente.id == null ? 'Enregistrer une Nouvelle Vente' : 'Modifier la Vente'}"></h1>
+
+    <form th:action="@{/ventes/sauvegarder}" th:object="${vente}" method="post" class="form">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="form-group">
+            <label for="lotPoulet">Lot de Poulets :</label>
+            <select id="lotPoulet" th:field="*{lotPoulet.id}" required>
+                <option value="">Sélectionnez un lot</option>
+                <option th:each="lot : ${lots}" th:value="${lot.id}" th:text="${'Lot ID: ' + lot.id + ' (Poulets initiaux: ' + lot.nombrePouletsInitial + ')'}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="dateVente">Date de Vente :</label>
+            <input type="date" id="dateVente" th:field="*{dateVente}" required />
+        </div>
+
+        <div class="form-group">
+            <label for="nombrePouletsVendus">Nombre de Poulets Vendus :</label>
+            <input type="number" id="nombrePouletsVendus" th:field="*{nombrePouletsVendus}" min="0" required />
+        </div>
+
+        <div class="form-group">
+            <label for="poidsTotalVenduKg">Poids Total Vendu (Kg) :</label>
+            <input type="number" id="poidsTotalVenduKg" th:field="*{poidsTotalVenduKg}" step="0.01" min="0" required />
+        </div>
+
+        <div class="form-group">
+            <label for="prixUnitaireKg">Prix Unitaire (Ar/Kg) :</label>
+            <input type="number" id="prixUnitaireKg" th:field="*{prixUnitaireKg}" step="0.01" min="0" required />
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="button-primary">Enregistrer la Vente</button>
+            <a th:href="@{/ventes}" class="button-secondary">Annuler</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

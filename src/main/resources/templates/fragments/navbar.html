@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar Fragment</title>
+    <style>
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .navbar-nav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar-nav li {
+            float: left;
+        }
+
+        .navbar-nav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar-nav li a:hover {
+            background-color: #575757;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar" th:fragment="navbar">
+    <a class="navbar-brand" href="/">Gestion Avicole</a>
+    <ul class="navbar-nav">
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/lots">Lots de Poulets</a></li>
+        <li><a href="/aliments">Aliments</a></li>
+        <li><a href="/ventes">Ventes</a></li>
+        <li><a href="/statistiques">Statistiques</a></li>
+        <li><a href="/users">Utilisateurs</a></li>
+    </ul>
+</nav>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Ventes</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1>Liste des Ventes</h1>
+    <a th:href="@{/ventes/ajouter}" class="button-add">Enregistrer une Nouvelle Vente</a>
+
+    <div th:if="${#lists.isEmpty(ventes)}" class="no-data-message">
+        <p>Aucune vente enregistrée pour le moment.</p>
+    </div>
+
+    <div th:unless="${#lists.isEmpty(ventes)}" class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>ID Vente</th>
+                <th>Date de Vente</th>
+                <th>Lot de Poulets (ID)</th>
+                <th>Poulets Vendus</th>
+                <th>Poids Total (Kg)</th>
+                <th>Prix Unitaire (Ar/Kg)</th>
+                <th>Montant Total (Ar)</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="vente : ${ventes}">
+                <td th:text="${vente.id}"></td>
+                <td th:text="${#temporals.format(vente.dateVente, 'dd-MM-yyyy')}"></td>
+                <td>
+                    <span th:if="${vente.lotPoulet != null}" th:text="${vente.lotPoulet.id}"></span>
+                    <span th:unless="${vente.lotPoulet != null}">N/A</span>
+                </td>
+                <td th:text="${vente.nombrePouletsVendus}"></td>
+                <td th:text="${#numbers.formatDecimal(vente.poidsTotalVenduKg, 1, 'COMMA', 2, 'POINT')}"></td>
+                <td th:text="${#numbers.formatDecimal(vente.prixUnitaireKg, 1, 'COMMA', 2, 'POINT')}"></td>
+                <td th:text="${#numbers.formatDecimal(vente.montantTotal, 1, 'COMMA', 2, 'POINT')}"></td>
+                <td>
+                    <a th:href="@{/ventes/modifier/{id}(id=${vente.id})}" class="button-action button-edit">Modifier</a>
+                    <a th:href="@{/ventes/supprimer/{id}(id=${vente.id})}" class="button-action button-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette vente ?');">Supprimer</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

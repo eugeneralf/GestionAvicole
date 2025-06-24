@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Lots de Poulets</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1>Liste des Lots de Poulets</h1>
+
+    <a href="/lots/ajouter" class="button-add">Ajouter un nouveau lot</a>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre Initial de Poulets</th>
+            <th>Poids Moyen (Kg)</th>
+            <th>Date d'Entrée</th> <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="lot : ${lots}">
+            <td th:text="${lot.id}">ID</td>
+            <td th:text="${lot.nombrePouletsInitial}">Nombre de poulets</td>
+            <td th:text="${lot.poidsMoyenPouletKg}">Poids Moyen</td>
+            <td th:text="${lot.dateEntree}">Date Entrée</td> <td>
+            <a th:href="@{/lots/modifier/{id}(id=${lot.id})}" class="button-edit">Modifier</a>
+            <a th:href="@{/lots/supprimer/{id}(id=${lot.id})}" class="button-delete"
+               onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce lot ?');">Supprimer</a>
+        </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(lots)}">
+            <td colspan="5" style="text-align: center;">Aucun lot de poulets enregistré pour le moment.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

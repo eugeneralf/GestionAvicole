@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Aliments</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1>Gestion des Aliments</h1>
+
+    <a href="/aliments/ajouter" class="button-add">Ajouter un nouvel aliment</a>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Quantité (kg)</th>
+            <th>Date d'Achat</th>
+            <th>Prix Achat (Ar/kg)</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="aliment : ${aliments}">
+            <td th:text="${aliment.id}">ID</td>
+            <td th:text="${aliment.nom}">Nom</td>
+            <td th:text="${aliment.type}">Type</td>
+            <td th:text="${aliment.quantiteStockKg}">Quantité</td>
+            <td th:text="${#temporals.format(aliment.dateAchat, 'dd/MM/yyyy')}">Date Achat</td>
+            <td th:text="${#numbers.formatDecimal(aliment.prixAchatKg, 1, 2)}">Prix Achat</td>
+            <td>
+                <a th:href="@{/aliments/modifier/{id}(id=${aliment.id})}" class="button-edit">Modifier</a>
+                <a th:href="@{/aliments/supprimer/{id}(id=${aliment.id})}" class="button-delete"
+                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet aliment ?');">Supprimer</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(aliments)}">
+            <td colspan="7" style="text-align: center;">Aucun aliment enregistré pour le moment.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

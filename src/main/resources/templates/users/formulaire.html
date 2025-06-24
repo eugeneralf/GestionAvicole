@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${user.id == null ? 'Enregistrer un Utilisateur' : 'Modifier un Utilisateur'}">Formulaire Utilisateur</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1 th:text="${user.id == null ? 'Enregistrer un Nouvel Utilisateur' : 'Modifier l\'Utilisateur'}"></h1>
+
+    <form th:action="@{/users/sauvegarder}" th:object="${user}" method="post" class="form-container">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="form-group">
+            <label for="username">Nom d'utilisateur:</label>
+            <input type="text" id="username" th:field="*{username}" required />
+        </div>
+
+        <div class="form-group">
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" th:field="*{password}" th:required="${user.id == null}" />
+            <small th:if="${user.id != null}" style="color: gray;">Laissez vide pour conserver le mot de passe actuel.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="role">Rôle:</label>
+            <select id="role" th:field="*{role}" required>
+                <option value="">Sélectionnez un rôle</option>
+                <option value="ADMIN">ADMIN</option>
+                <option value="USER">USER</option>
+                <option value="VIEWER">VIEWER</option>
+            </select>
+        </div>
+
+        <button type="submit" class="button-primary">Sauvegarder</button>
+        <a href="/users" class="button-secondary">Annuler</a>
+    </form>
+</div>
+</body>
+</html>

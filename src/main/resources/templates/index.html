@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord - Gestion Avicole</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1>Tableau de Bord</h1>
+
+    <div class="dashboard-grid">
+        <div class="card">
+            <h2>Lots Actuels</h2>
+            <p>Nombre total de lots enregistrés : <span th:text="${nombreTotalLots}">0</span></p>
+            <p>Total de poulets entrés : <span th:text="${totalPouletsInitiaux}">0</span></p>
+            <a href="/lots" class="button-link-small">Voir les lots</a>
+        </div>
+
+        <div class="card">
+            <h2>Ventes</h2>
+            <p>Total poulets vendus : <span th:text="${totalPouletsVendus}">0</span></p>
+            <p>Montant total des ventes : <span th:text="${#numbers.formatDecimal(totalMontantVentes, 0, 'COMMA', 2, 'POINT')}">0</span> Ar</p>
+            <a href="/ventes" class="button-link-small">Voir les ventes</a>
+        </div>
+
+        <div class="card">
+            <h2>Accès Rapide</h2>
+            <p><a href="/lots/ajouter" class="button-link-small">Ajouter un Lot</a></p>
+            <p><a href="/ventes/ajouter" class="button-link-small">Enregistrer une Vente</a></p>
+            <p><a href="/statistiques" class="button-link-small">Rapports Détaillés</a></p>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

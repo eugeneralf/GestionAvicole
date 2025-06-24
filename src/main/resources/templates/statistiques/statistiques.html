@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiques d'Élevage</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1>Statistiques de l'Élevage Avicole</h1>
+
+    <div class="stats-section">
+        <h2>Statistiques Générales</h2>
+        <div class="stat-card">
+            <h3>Lots de Poulets</h3>
+            <p>Nombre total de lots : <strong th:text="${totalLots}">0</strong></p>
+            <p>Total poulets en élevage (estimé) : <strong th:text="${totalPouletsElevage}">0</strong> poulets</p>
+            <p>Poids moyen des poulets (lots) : <strong th:text="${#numbers.formatDecimal(poidsMoyenPoulet, 1, 2)}">0.00</strong> kg</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Aliments en Stock</h3>
+            <p>Total stock aliments : <strong th:text="${#numbers.formatDecimal(totalStockAlimentsKg, 1, 2)}">0.00</strong> kg</p>
+            <p>Types d'aliments enregistrés : <strong th:text="${totalTypesAliments}">0</strong></p>
+        </div>
+    </div>
+
+    <div class="stats-section">
+        <h2>Statistiques des Ventes</h2>
+        <div class="stat-card">
+            <h3>Performances de Vente</h3>
+            <p>Chiffre d'affaires total : <strong th:text="${#numbers.formatDecimal(chiffreAffairesTotal, 1, 2)}">0.00</strong> Ar</p>
+            <p>Total ventes enregistrées : <strong th:text="${totalVentesEnregistrees}">0</strong></p>
+            <p>Total poulets vendus : <strong th:text="${totalPouletsVendues}">0</strong> poulets</p>
+            <p>Poids total vendu : <strong th:text="${#numbers.formatDecimal(poidsTotalVendu, 1, 2)}">0.00</strong> kg</p>
+        </div>
+    </div>
+
+    <style>
+        .stats-section {
+            margin-bottom: 30px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .stats-section h2 {
+            color: #0056b3;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .stat-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.03);
+        }
+        .stat-card h3 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .stat-card p {
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        .stat-card p strong {
+            color: #007bff;
+            font-size: 1.2em;
+        }
+    </style>
+</div>
+</body>
+</html>

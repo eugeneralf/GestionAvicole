@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${lotPoulet.id == null ? 'Ajouter un Lot de Poulets' : 'Modifier un Lot de Poulets'}">Formulaire Lot de Poulets</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1 th:text="${lotPoulet.id == null ? 'Ajouter un Nouveau Lot de Poulets' : 'Modifier le Lot de Poulets'}"></h1>
+
+    <form th:action="@{/lots/sauvegarder}" th:object="${lotPoulet}" method="post" class="form-container">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="form-group">
+            <label for="nombrePouletsInitial">Nombre Initial de Poulets:</label>
+            <input type="number" id="nombrePouletsInitial" th:field="*{nombrePouletsInitial}" required />
+        </div>
+
+        <div class="form-group">
+            <label for="poidsMoyenPouletKg">Poids Moyen par Poulet (Kg):</label>
+            <input type="number" step="0.01" id="poidsMoyenPouletKg" th:field="*{poidsMoyenPouletKg}" required />
+        </div>
+
+        <div class="form-group">
+            <label for="dateEntree">Date d'Entrée:</label> <input type="date" id="dateEntree" th:field="*{dateEntree}" required /> </div>
+
+        <button type="submit" class="button-submit">Enregistrer le Lot</button>
+        <a href="/lots" class="button-cancel">Annuler</a>
+    </form>
+</div>
+</body>
+</html>

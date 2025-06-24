@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Utilisateurs</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1>Gestion des Utilisateurs</h1>
+
+    <a href="/users/ajouter" class="button-add">Ajouter un nouvel utilisateur</a>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom d'utilisateur</th>
+            <th>Rôle</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}">ID</td>
+            <td th:text="${user.username}">Nom d'utilisateur</td>
+            <td th:text="${user.role}">Rôle</td>
+            <td>
+                <a th:href="@{/users/modifier/{id}(id=${user.id})}" class="button-edit">Modifier</a>
+                <a th:href="@{/users/supprimer/{id}(id=${user.id})}" class="button-delete"
+                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(users)}">
+            <td colspan="4" style="text-align: center;">Aucun utilisateur enregistré pour le moment.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
